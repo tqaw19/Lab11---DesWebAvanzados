@@ -1,0 +1,14 @@
+<table class="table">
+  <tr>
+    <th>Nombre</th>
+    <th>Precio</th>
+    <th>Categoría</th>
+  </tr>
+<% lista.forEach(function(prod) { %>
+  <tr>
+	<td><%= prod.nombre %></td>
+	<td>S/ <%= prod.precio %></td>
+	<td><%= prod.categoria_id.nombre %></td>
+  </tr>
+<% }); %>
+</table>

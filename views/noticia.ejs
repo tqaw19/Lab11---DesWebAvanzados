@@ -1,0 +1,20 @@
+<h1>Noticias</h1>
+<table id="dataTable" class="table table-dark">
+    <thead>
+        <td>Titulo</td>
+        <td>Fecha</td>
+    </thead>
+</table>
+<script>
+$('#dataTable').dataTable({
+    "processing" : true,
+    "ajax" : {
+        "url": "http://localhost:3000/news/listar",
+        "dataSrc" : ""
+    },
+    "columns": [
+        {"data":"titulo"},
+        {"data":"fecha"},        
+    ]
+});
+</script>
