@@ -1,0 +1,53 @@
+[{
+	"_id": 1,
+	"titulo": "Aplicaciones del blockchain: lo que está por venir",
+	"descripcion": "Bitcoin es solo la punta del iceberg de la tecnología blockchain, pero pronto veremos cómo se integra en todos los ámbitos de la sociedad. Te contamos algunas de las aplicaciones del Blockchain que están por venir.",
+	"categoria": "BLOCKCHAIN",
+	"fecha": "2017-03-25",
+	"comentarios": [{
+		"autor": "Carlos Valenzuela",
+		"mensaje": "Interesante noticia",
+		"fecha": "2017-03-25"
+	}, {
+		"autor": "Fernando Miranda",
+		"mensaje": "Muy interesante",
+		"fecha": "2017-03-25"
+	}]
+}, {
+	"_id": 2,
+	"titulo": "¿Hacia dónde caminan esos elefantes marinos? La respuesta nos la da el Big Data",
+	"descripcion": "El estudio ha seguido a 272 elefantes marinos durante toda una década registrando cada uno de sus movimientos. De ese modo, no ha sido necesario establecer turning points, sino examinar el comportamiento real del grupo de mamíferos. Este examen aporta datos novedosos sobre la lógica que marca los trayectos de estos animales.",
+	"categoria": "BIG DATA",
+	"fecha": "2017-04-17",
+	"comentarios": [{
+		"autor": "Miranda García",
+		"mensaje": "Interante información",
+		"fecha": "2017-04-20"
+	}, {
+		"autor": "Manuel García",
+		"mensaje": "Muy buen aporte!",
+		"fecha": "2017-04-29"
+	}, {
+		"autor": "Melissa Barrueto",
+		"mensaje": "Que lindos animalitos!",
+		"fecha": "2017-04-29"
+	}]
+}, {
+	"_id": 3,
+	"titulo": "Aprendizaje reforzado: cuando las máquinas aprenden solas",
+	"descripcion": "¿Podremos tratar realmente a los robots de tú a tú? Los métodos de aprendizaje para que las máquinas puedan manejarse de forma autónoma son cada vez más sofisticados e incluso hoy en día son ya capaces de aprender por sí mismas. Veamos qué es eso del aprendizaje reforzado.",
+	"categoria": "INTELIGENCIA ARTIFICIAL",
+	"fecha": "2017-04-22",
+	"comentarios": []
+}, {
+	"_id": 4,
+	"titulo": "Robótica submarina para la sostenibilidad y la observación del océano",
+	"descripcion": "Muchas de las operaciones más difíciles y peligrosas que ahora realizan buzos profesionales en entornos submarinos podrían ser realizadas por vehículos submarinos no tripulados. Conoce el proyecto SWARMs.",
+	"categoria": "ROBOTS",
+	"fecha": "2017-05-07",
+	"comentarios": [{
+		"autor": "Felipe Torres",
+		"mensaje": "Interesante tema, quiero saber mas para una clase.",
+		"fecha": "2017-05-18"
+	}]
+}]
