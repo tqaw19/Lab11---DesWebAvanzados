@@ -1,20 +1,149 @@
-<h1>Noticias</h1>
+<p>
+    <button class="tn btn-primary btnNuevo">Nuevo</button>
+</p>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Nuevo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!--MODAL CONTENT-->
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <input id="id" type="hidden" value="" />
+                        <label class="col-sm-2 control-label" for="inputTitulo">Titulo</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputTitulo" type="text" placeholder="Titulo" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input id="id" type="hidden" value="" />
+                        <label class="col-sm-2 control-label" for="inputDescripcion">Descripcion</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputDescripcion" placeholder="Descripcion" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input id="id" type="hidden" value="" />
+                        <label class="col-sm-2 control-label" for="inputCategoria">Categoria</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputCategoria" type="text" placeholder="Categoria" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input id="id" type="hidden" value="" />
+                        <label class="col-sm-2 control-label" for="inputFecha">Fecha</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputFecha" type="text" placeholder="Fecha" />
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table id="dataTable" class="table table-dark">
     <thead>
         <td>Titulo</td>
         <td>Fecha</td>
+        <td>Acciones</td>
     </thead>
 </table>
 <script>
-$('#dataTable').dataTable({
-    "processing" : true,
-    "ajax" : {
-        "url": "http://localhost:3000/news/listar",
-        "dataSrc" : ""
-    },
-    "columns": [
-        {"data":"titulo"},
-        {"data":"fecha"},        
-    ]
-});
+    $('.btnNuevo').click(function () {
+        $('#myModal').modal('show');
+    });
+
+    $('.btnGuardar').click(function () {
+        datos = {
+            titulo: $('#inputTitulo').val(),
+            descripcion: $('#inputDescripcion').val(),
+            categoria: $('#inputCategoria').val(),
+            fecha: $('#inputFecha').val()
+        };
+
+        val_id = ('#id').val();
+        if (val_id == '') {
+            ruta = 'new/crear';
+        } else {
+            ruta = 'news/actualizar';
+            datos.id = val_id;
+        }
+        $.post(ruta, datos, function (data) {
+            $('#id').val('');
+            $('#inputTitulo').val('');
+            // $('#inputDescripcion').val('');
+            // $('#inputCategoria').val('');
+            // $('#inputFecha').val('');
+            $('#myModal').modal('hide');
+
+        })
+
+        $.post('news/crear', datos, function (data) {
+            console.log(data);
+            $('#inputTitulo').val('');
+            $('#inputDescripcion').val('');
+            $('#inputCategoria').val('');
+            $('#inputFecha').val('');
+            $('#myModal').modal('hide');
+            $('#dataTable').DataTable().ajax.reload();
+        });
+    });
+
+    $('#dataTable').on('click', '.btnEliminar', function () {
+        val_id = $(this).data('id');
+        // alert(val_id);
+        if (confirm('¿Desea elimninar este registro?')) {
+            $.post('news/elimninar/', { id: val_id }, function (data) {
+                $('#dataTable').DataTable().ajax.reload();
+            });
+        }
+    });
+
+    $('#dataTable').on('click', '.btnEditar', function () {
+        val_id = $(this).data('id');
+        // alert(val_id);
+        $.get('news/detalle/' + val_id, function (data) {
+            $('#id').val(data._id);
+            $('#inputTitulo').val(data.titulo);
+            $('#inputDescripcion').val(data.descripcion);
+            $('#inputCategoria').val(data.categoria);
+            $('#inputFecha').val(data.fecha);
+            $('#myModal').modal('show');
+        });
+    });
+
+    $('#dataTable').dataTable({
+        "processing": true,
+        "ajax": {
+            "url": "news/listar",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "titulo" },
+            { "data": "fecha" },
+            {
+                "data": null,
+                "render": function (data, type, row, meta) {
+                    html = '<td><button data-id="' + data._id + '" class="btn btn-info btnEditar"><i class="fas fa-pencil-alt"></i></button></td>';
+                    html += '<td><button data-id="' + data._id + '" class="btn btn-danger btnEliminar"><i class="fas fa-trash-alt"></i></button></td>';
+                    return html;
+                }
+            }
+        ]
+    });
 </script>

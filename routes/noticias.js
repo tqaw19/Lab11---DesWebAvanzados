@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   res.render('noticia',function(err,html){
     if(err) throw err;
     res.render('layouts/layout',{
-        tituloSeccion: 'Noticia',
+        tituloSeccion: 'Noticias',
         seccion: html
       });
   });
