@@ -1,11 +1,10 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h2>Noticia</h2>
+        <h2><%=lista.titulo%></h2>
 
     </div>
     <div class="card-body">
         <div class="text-center">
-            <p><strong>Título: </strong><%=lista.titulo%></p>
             <p><strong>Descripción: </strong><%=lista.descripcion%></p>
             <p><strong>Categoría: </strong><%=lista.categoria%></p>
             <p><strong>Fecha: </strong><%=lista.fecha%></p>
@@ -13,9 +12,9 @@
         </div>
     </div>
     <div class="card-footer d-flex justify-content-between align-items-center">
-        <button class="btn btn-success" id="btn-like" data-id="">
-            <i class="fas fa-thumbs-up"></i> Like
-        </button>
+        <a class="btn btn-success" href="/blog/news" id="btn-like" data-id="">
+            <i class="fas fa-arrow-circle-left"></i> Regresar a las noticias
+        </a>
 
     </div>
 </div>
@@ -47,5 +46,28 @@
             </form>
         </blockquote>
 
+        <ul class="list-group p-4">
+            <% lista.comentarios.forEach(function(prod) { %>
+            <li class="row">
+                <a href="#" class="col text-center">
+                    <img src="https://image.flaticon.com/icons/png/512/149/149071.png" width="50px" alt="">
+                </a>
+                <blockquote class="col">
+                    <p class="lead"><%= prod.mensaje%></p>
+                    <footer class="blockquote-footer">
+                        <%=prod.autor%> - <%=prod.fecha%>
+                    </footer>
+                </blockquote>
+            </li>
+            <% }); %>
+        </ul>
     </div>
 </div>
+
+<script>
+    $('#post-comment').hide();
+    $('#btn-toggle-comment').click(e => {
+        e.preventDefault();
+        $('#post-comment').slideToggle();
+    })
+</script>
