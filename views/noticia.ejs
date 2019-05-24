@@ -46,7 +46,6 @@
                     </div>
                 </form>
 
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -63,61 +62,51 @@
         <td>Acciones</td>
     </thead>
 </table>
+
 <script>
-    $('.btnNuevo').click(function () {
+    $('.btnNuevo').click(function(){
         $('#myModal').modal('show');
     });
-
-    $('.btnGuardar').click(function () {
+    $('.btnGuardar').click(function(){
         datos = {
-            titulo: $('#inputTitulo').val(),
-            descripcion: $('#inputDescripcion').val(),
-            categoria: $('#inputCategoria').val(),
-            fecha: $('#inputFecha').val()
+          titulo: $('#inputTitulo').val(),
+          descripcion: $('#inputDescripcion').val(),
+          categoria: $('#inputCategoria').val(),
+          fecha: $('#inputFecha').val()
         };
-
-        val_id = ('#id').val();
-        if (val_id == '') {
-            ruta = 'new/crear';
-        } else {
+        val_id = $('#id').val();
+        if(val_id==''){
+            ruta = 'news/crear';
+        }else{
             ruta = 'news/actualizar';
             datos.id = val_id;
         }
-        $.post(ruta, datos, function (data) {
+        $.post(ruta, datos,function(){
             $('#id').val('');
-            $('#inputTitulo').val('');
-            // $('#inputDescripcion').val('');
-            // $('#inputCategoria').val('');
-            // $('#inputFecha').val('');
-            $('#myModal').modal('hide');
-
-        })
-
-        $.post('news/crear', datos, function (data) {
-            console.log(data);
             $('#inputTitulo').val('');
             $('#inputDescripcion').val('');
             $('#inputCategoria').val('');
             $('#inputFecha').val('');
             $('#myModal').modal('hide');
-            $('#dataTable').DataTable().ajax.reload();
+            $("#dataTable").DataTable().ajax.reload();
         });
     });
 
-    $('#dataTable').on('click', '.btnEliminar', function () {
+    $('#dataTable').on('click','.btnEliminar',function () {
         val_id = $(this).data('id');
-        // alert(val_id);
+        //alert(val_id);
         if (confirm('¿Desea elimninar este registro?')) {
-            $.post('news/elimninar/', { id: val_id }, function (data) {
-                $('#dataTable').DataTable().ajax.reload();
+            $.post('news/eliminar/', { id: val_id }, function (data) {                
             });
+            $("#dataTable").DataTable().ajax.reload();
         }
     });
 
-    $('#dataTable').on('click', '.btnEditar', function () {
+    
+    $('#dataTable').on('click','.btnEditar',function(){
         val_id = $(this).data('id');
-        // alert(val_id);
-        $.get('news/detalle/' + val_id, function (data) {
+        //alert(val_id);
+        $.get('news/detalle/'+val_id,function(data){
             $('#id').val(data._id);
             $('#inputTitulo').val(data.titulo);
             $('#inputDescripcion').val(data.descripcion);
@@ -126,24 +115,23 @@
             $('#myModal').modal('show');
         });
     });
-
-    $('#dataTable').dataTable({
+    
+    $("#dataTable").dataTable({
         "processing": true,
         "ajax": {
-            "url": "news/listar",
-            "dataSrc": ""
+            url: 'news/listar',
+            dataSrc: ""
         },
-        "columns": [
-            { "data": "titulo" },
-            { "data": "fecha" },
-            {
-                "data": null,
-                "render": function (data, type, row, meta) {
-                    html = '<td><button data-id="' + data._id + '" class="btn btn-info btnEditar"><i class="fas fa-pencil-alt"></i></button></td>';
-                    html += '<td><button data-id="' + data._id + '" class="btn btn-danger btnEliminar"><i class="fas fa-trash-alt"></i></button></td>';
-                    return html;
-                }
+        "columns" : [
+            {"data" : "titulo"},
+            {"data" : "fecha"},
+            {"data" : null,
+              render: function(data,type,row,meta){
+                  html = '<td><button class="btn btn-info btnEditar" data-id="'+data._id+'" ><i class="fas fa-pencil-alt"></i></button></td>';
+                  html+= '<td><button class="btn btn-danger btnEliminar" data-id="'+data._id+'"><i class="fas fa-trash-alt"></i></button></td>';
+                  return html;
+              }
             }
         ]
     });
-</script>
+    </script>

@@ -27,38 +27,35 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-		model.findOne({}, {
-			_id: 1
-		}, {
-				sort: {
-					_id: -1
-				},
-				limit: 1
-			}, function (err, result) {
-				if (err) {
-					console.log(err);
-					res.sendStatus(500);
-				} else {
-					let obj = new model;
-					last_id = parseInt(result._id);
-					obj._id = (last_id + 1);
-					obj.titulo = req.body.titulo;
-					obj.descripcion = req.body.descripcion;
-					obj.categoria = req.body.categoria;
-					obj.fecha = req.body.fecha;
-					obj.save(function (err, newData) {
-						if (err) {
-							console.log(err);
-							res.sendStatus(500);
-						} else {
-							res.json(newData);
-						}
-					});
-				}
-			});
+		model.findOne({}, { _id: 1 }, {
+			sort: { _id: -1 }, limit:
+				1
+		}, function (err, result) {
+			if (err) {
+				console.log(err);
+				res.sendStatus(500);
+			} else {
+				let obj = new model;
+				last_id = parseInt(result._id);
+				obj._id = (last_id + 1);
+				obj.titulo = req.body.titulo;
+				obj.descripcion = req.body.descripcion;
+				obj.categoria = req.body.categoria;
+				obj.fecha = req.body.fecha;
+				obj.save(function (err, newData) {
+					if (err) {
+						console.log(err);
+						res.sendStatus(500);
+					} else {
+						res.json(newData);
+					}
+				});
+			}
+		});
 	},
 	update: function (req, res) {
 		let val_id = req.body.id;
+		console.log('ID del elemento: ' + val_id);		
 		let datos = {
 			titulo: req.body.titulo,
 			descripcion: req.body.descripcion,
@@ -78,6 +75,14 @@ module.exports = {
 	},
 	delete: function (req, res) {
 		let val_id = req.body.id;
-		console.log('este es el id: ' + val_id);
+		console.log('ID del elemento: ' + val_id);		
+		model.deleteOne({
+			_id: val_id
+		}, function(err, res) {
+			if (err) {
+				console.log(err);
+				res.sendStatus(500);
+			} 
+		});
 	}
 };

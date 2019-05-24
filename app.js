@@ -12,6 +12,7 @@ var loginRouter = require('./routes/login');
 var adminRouter = require('./routes/admin');
 var productoRouter = require('./routes/producto');
 var noticiaRouter = require('./routes/noticias');
+var blogRouter = require('./routes/blog');
 var app = express();
 
 // view engine setup
@@ -32,6 +33,7 @@ app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/news', noticiaRouter);
+app.use('/blog', blogRouter);
 app.use('/producto',productoRouter);
 
 // catch 404 and forward to error handler
