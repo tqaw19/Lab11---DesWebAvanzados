@@ -5,7 +5,23 @@
     </div>
     <div class="card-body">
         <div class="row">
-
+            <% lista.forEach(function(prod) { %>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://picsum.photos/200/150/?random">
+                    <div class="card-block">
+                        <h4 class="card-title mt-3">Título: <%= prod.titulo %></h4>
+                        <div class="card-text">
+                                <%= prod.descripcion %>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small><%= prod.fecha %></small>
+                        <button class="btn btn-secondary float-right btn-sm">Leer</button>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
         </div>
     </div>
     <script>

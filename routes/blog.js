@@ -1,23 +1,12 @@
 // routes/noticias.js
 //noticia.js
 var express = require('express');
-var controller = require('../controllers/noticiaController');
+var controller = require('../controllers/blogController');
 var router = express.Router();
 
 /* GET users listing. */
 router.get('/news', function(req, res, next) {
-  //controller.show(req, res);
-    res.render('blog', function(err,html){
-      if(err) throw err;
-      res.render('layouts/layout',{
-          tituloSeccion: 'Sección de Noticias',
-          seccion: html
-        });
-    });
-});
-
-router.get('/listar', function(req, res, next) {
-  controller.show(req, res);  
+  controller.show(req, res);
 });
 
 /* GET users listing. */

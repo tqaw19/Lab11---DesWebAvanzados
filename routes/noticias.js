@@ -40,14 +40,14 @@ router.post('/eliminar', function(req, res, next) {
     controller.delete(req, res);
   });
 
-router.get('/news', function(req, res, next) {
-  res.render('index',function(err,html){
-    if(err) throw err;
-    res.render('layouts/layout',{
-        tituloSeccion: 'Últimas Noticias',
-        seccion: html
-      });
-  });
- });
+// router.get('/news', function(req, res, next) {
+//   res.render('index',function(err,html){
+//     if(err) throw err;
+//     res.render('layouts/layout',{
+//         tituloSeccion: 'Últimas Noticias',
+//         seccion: html
+//       });
+//   });
+//  });
 
 module.exports = router;
