@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2>Noticia</h2>
+
+    </div>
+    <div class="card-body">
+        <div class="text-center">
+            <p><strong>Título: </strong><%=lista.titulo%></p>
+            <p><strong>Descripción: </strong><%=lista.descripcion%></p>
+            <p><strong>Categoría: </strong><%=lista.categoria%></p>
+            <p><strong>Fecha: </strong><%=lista.fecha%></p>
+            <img src="https://picsum.photos/200/150/?random" class="img-fluid">
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <button class="btn btn-success" id="btn-like" data-id="">
+            <i class="fas fa-thumbs-up"></i> Like
+        </button>
+
+    </div>
+</div>
+
+<div class="card mt-2">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3>Agregar Comentario</h3>
+        <button class="btn btn-info" id="btn-toggle-comment">
+            <i class="fa fa-comment-o"></i> Expandir
+        </button>
+    </div>
+    <div class="card-body">
+        <blockquote id="post-comment">
+            <form action="/images/{{image.uniqueId}}/comment" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Nombres">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" placeholder="Correo">
+                </div>
+                <div class="form-group">
+                    <textarea name="comment" rows="2" class="form-control" placeholder="escribir Nota Aquí"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" id="btn-comment">
+                        <i class="fa fa-comment"></i> Agregar Notas
+                    </button>
+                </div>
+            </form>
+        </blockquote>
+
+    </div>
+</div>

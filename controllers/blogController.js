@@ -19,15 +19,21 @@ module.exports = {
 	},
 	//localhost:3000/producto/detail/5cbf7bfc5944740911c34fcd
 	detail: function (req, res) {
-		let val_id = req.params.id;
-		model.findOne({
-			_id: val_id
-		}, function (err, data) {
-			if (err) {
+        let val_id = req.params.id;
+        console.log('id detalle: ' + val_id)
+		model.findOne({_id:val_id},function(err,data){
+			if(err){
 				console.log(err);
 				res.sendStatus(500);
-			} else {
-				res.send(data);
+			}else{
+				res.render('blogdetalle',{ lista: data } ,function(err, html){
+                    if (err) throw err;
+                    res.render('layouts/layout',{
+                        tituloSeccion: 'Detalles',
+                        seccion: html
+                    });                    
+                });
+                // res.json(data);
 			}
 		});
 	},
